@@ -1,0 +1,36 @@
+<h1>Todo Lists</h1>
+<div>
+  <h2>Add new todo description</h2>
+  <input type="text" [(ngModel)]="todoList.description">
+  <button (click)="createTodoList(todoList)" style="width: 75px;">Create</button>
+</div>
+<form (ngSubmit)="searchTodoLists()">
+  <input type="text" [(ngModel)]="searchWords" name="searchWords" placeholder="Search...">
+  <button type="submit" style="width: 75px;">Search</button>
+</form>
+<div *ngIf="todoLists.length > 0">
+
+  <table>
+    <thead>
+    <tr>
+      <th (click)="sortBy('id')">ID</th>
+      <button (click)="toggleSortDirection()" style="width: auto;">Sort by id {{ sortDirection === 'asc' ? 'ASC' : 'DESC' }}</button>
+      <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let todoList of todoLists">
+      <td>{{ todoList.id }}</td>
+      <td>
+        <input type="text" [(ngModel)]="todoList.description">
+      </td>
+      <td>
+        <button (click)="updateTodoList(todoList)"style="width: 75px;">Update</button>
+        <button (click)="deleteTodoList(todoList.id)" style="width: 75px;">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
